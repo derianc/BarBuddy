@@ -27,16 +27,19 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
             "mongodb+srv://derianc:gocvbKjTRhOdDIne@cluster0.e2qy2bp.mongodb.net/?retryWrites=true&w=majority", "BarBuddy"
        );
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8081";
+builder.WebHost.UseUrls($"http://*:{port}");
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+//if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
