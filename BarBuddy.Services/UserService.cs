@@ -14,9 +14,9 @@ namespace BarBuddy.Services
             _userRepository = userRepository;
         }
 
-        public async Task CreateUser(string name, string email, string password)
+        public async Task CreateUser(string firstName, string lastName, string username, string email, string password)
         {
-            await _userRepository.CreateUser(name, email, password);
+            await _userRepository.CreateUser(firstName, lastName, username, email, password);
         }
 
         public async Task<List<ApplicationUser>> ListUsers()

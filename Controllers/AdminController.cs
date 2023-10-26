@@ -17,9 +17,9 @@ namespace BarBuddy.Controllers
         }
 
         [HttpPost("CreateUser")]
-        public async Task<IActionResult> CreateUser(string name, string email, string password)
+        public async Task<IActionResult> CreateUser(string firstName, string lastName, string username, string email, string password)
         {
-            await _userService.CreateUser(name, email, password);
+            await _userService.CreateUser(firstName, lastName, username, email, password);
 
             return Ok();
         }

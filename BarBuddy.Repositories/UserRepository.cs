@@ -22,11 +22,13 @@ namespace BarBuddy.Repositories
             _usersCollection = _repository.Database.GetCollection<ApplicationUser>("Users");
         }
 
-        public async Task CreateUser(string name, string email, string password)
+        public async Task CreateUser(string firstName, string lastName, string username, string email, string password)
         {
             var applicationUser = new ApplicationUser
             {
-                UserName= name,
+                FirstName = firstName,
+                LastName = lastName,
+                UserName= username,
                 Email= email,
             };
 
