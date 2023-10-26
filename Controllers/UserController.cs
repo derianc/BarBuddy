@@ -40,7 +40,7 @@ namespace BarBuddy.Controllers
         }
 
         [HttpPost("ListUsers")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> ListUsers()
         {
             return Ok(await _userService.ListUsers());

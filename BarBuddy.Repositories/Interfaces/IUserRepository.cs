@@ -8,6 +8,6 @@ namespace BarBuddy.Repositories.Interfaces
         Task CreateUser(string name, string email, string password);
         Task<SignInResult> LoginUser(string username, string password);
         Task LogoutUser();
-        Task<ApplicationUser> ListUsers();
+        Task<List<ApplicationUser>> ListUsers();
     }
 }

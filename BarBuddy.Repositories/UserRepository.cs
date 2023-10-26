@@ -7,12 +7,19 @@ namespace BarBuddy.Repositories
 {
     public class UserRepository : IUserRepository
     {
+        private readonly IRepository _repository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        public UserRepository(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        private readonly IMongoCollection<ApplicationUser> _usersCollection;
+
+        public UserRepository(IRepository repository,
+                              UserManager<ApplicationUser> userManager, 
+                              SignInManager<ApplicationUser> signInManager)
         {
+            _repository = repository;
             _userManager = userManager;
             _signInManager = signInManager;
+            _usersCollection = _repository.Database.GetCollection<ApplicationUser>("Users");
         }
 
         public async Task CreateUser(string name, string email, string password)
@@ -30,9 +37,11 @@ namespace BarBuddy.Repositories
                 throw new Exception(result.Errors.First().ToString());
         }
 
-        public async Task<ApplicationUser> ListUsers()
+        public async Task<List<ApplicationUser>> ListUsers()
         {
-            return await Task.FromResult(new ApplicationUser());
+            var users = await _usersCollection.Find(u => true).ToListAsync();
+            
+            return users;
         }
 
         public async Task<SignInResult> LoginUser(string username, string password)

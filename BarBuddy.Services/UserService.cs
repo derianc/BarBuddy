@@ -19,7 +19,7 @@ namespace BarBuddy.Services
             await _userRepository.CreateUser(name, email, password);
         }
 
-        public async Task<ApplicationUser> ListUsers()
+        public async Task<List<ApplicationUser>> ListUsers()
         {
             return await _userRepository.ListUsers();
         }
