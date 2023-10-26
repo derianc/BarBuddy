@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>12734e35-031c-4e37-8a1b-ba05e8af330e</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>.</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="BarBuddy.Data\**" />
+    <Compile Remove="BarBuddy.Repositories\**" />
+    <Compile Remove="BarBuddy.Services\**" />
+    <Content Remove="BarBuddy.Data\**" />
+    <Content Remove="BarBuddy.Repositories\**" />
+    <Content Remove="BarBuddy.Services\**" />
+    <EmbeddedResource Remove="BarBuddy.Data\**" />
+    <EmbeddedResource Remove="BarBuddy.Repositories\**" />
+    <EmbeddedResource Remove="BarBuddy.Services\**" />
+    <None Remove="BarBuddy.Data\**" />
+    <None Remove="BarBuddy.Repositories\**" />
+    <None Remove="BarBuddy.Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="BarBuddy.Services\BarBuddy.Services.csproj" />
+  </ItemGroup>
+
+</Project>
