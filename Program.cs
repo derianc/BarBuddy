@@ -20,6 +20,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<IVenueRepository, VenueRepository>();
+builder.Services.AddScoped<IVenueService, VenueService>();
 
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
        .AddMongoDbStores<ApplicationUser, ApplicationRole, Guid>
@@ -27,8 +29,10 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
             "mongodb+srv://derianc:gocvbKjTRhOdDIne@cluster0.e2qy2bp.mongodb.net/?retryWrites=true&w=majority", "BarBuddy"
        );
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8081";
-builder.WebHost.UseUrls($"http://*:{port}");
+#if (RELEASE)
+    var port = Environment.GetEnvironmentVariable("PORT") ?? "8081";
+    builder.WebHost.UseUrls($"http://*:{port}");
+#endif
 
 var app = builder.Build();
 

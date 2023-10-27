@@ -1,4 +1,5 @@
 ﻿using BarBuddy.Data;
+using BarBuddy.Extensions;
 using BarBuddy.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using MongoDB.Driver;
@@ -30,6 +31,7 @@ namespace BarBuddy.Repositories
                 LastName = lastName,
                 UserName= username,
                 Email= email,
+                DOB = DateTime.Now.RandomDOB().Date
             };
 
             var result = await _userManager.CreateAsync(applicationUser, password);

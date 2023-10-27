@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BarBuddy.Extensions\BarBuddy.Extensions.csproj" />
     <ProjectReference Include="..\BarBuddy.Data\BarBuddy.Data.csproj" />
   </ItemGroup>
 

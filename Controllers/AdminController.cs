@@ -1,4 +1,5 @@
-﻿using BarBuddy.Services.Interfaces;
+﻿using BarBuddy.Repositories.Interfaces;
+using BarBuddy.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BarBuddy.Controllers
@@ -9,11 +10,15 @@ namespace BarBuddy.Controllers
     {
         private readonly IUserService _userService;
         private readonly IRoleService _roleService;
+        private readonly IVenueRepository _venueService;
 
-        public AdminController(IUserService userService, IRoleService roleService)
+        public AdminController(IUserService userService, 
+                               IRoleService roleService,
+                               IVenueRepository venueService)
         {
             _userService = userService;
             _roleService = roleService;
+            _venueService = venueService;
         }
 
         [HttpPost("CreateUser")]
@@ -28,6 +33,14 @@ namespace BarBuddy.Controllers
         public async Task<IActionResult> CreateRole(string name)
         {
             await _roleService.CreateRole(name);
+
+            return Ok();
+        }
+
+        [HttpPost("RegisterVenue")]
+        public async Task<IActionResult> RegisterVenue(string venueName)
+        {
+            await _venueService.RegisterVenue(venueName);
 
             return Ok();
         }
