@@ -1,6 +1,7 @@
 ﻿using BarBuddy.Data;
 using BarBuddy.Repositories.Interfaces;
 using BarBuddy.Services.Interfaces;
+using MongoDB.Driver.GeoJsonObjectModel;
 
 namespace BarBuddy.Services
 {
@@ -17,6 +18,11 @@ namespace BarBuddy.Services
             throw new NotImplementedException();
         }
 
+        public async Task<Venue> GetVenueById(Guid id)
+        {
+            return await _venueRepository.GetVenueById(id);
+        }
+
         public async Task<List<Venue>> GetVenues()
         {
             return await _venueRepository.GetVenues();
@@ -25,6 +31,11 @@ namespace BarBuddy.Services
         public async Task RegisterVenue(string venueName)
         {
             await _venueRepository.RegisterVenue(venueName);
+        }
+
+        public async Task UpdateVenue(Venue venue)
+        {
+            await _venueRepository.UpdateVenue(venue);
         }
     }
 }

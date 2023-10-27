@@ -16,9 +16,9 @@ namespace BarBuddy.Repositories
             _venueCollection = _repository.Database.GetCollection<Venue>("Venue");
         }
 
-        public Task<Venue> GetVenueById(string id)
+        public async Task<Venue> GetVenueById(Guid id)
         {
-            throw new NotImplementedException();
+            return await _venueCollection.Find(v => v.Id == id).FirstAsync();
         }
 
         public Task<List<Venue>> GetVenues()
@@ -35,6 +35,11 @@ namespace BarBuddy.Repositories
             };
 
             await _venueCollection.InsertOneAsync(venue);
+        }
+
+        public async Task UpdateVenue(Venue venue)
+        {
+            var result = await _venueCollection.ReplaceOneAsync(v => v.Id == venue.Id, venue);
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using BarBuddy.Services.Interfaces;
+﻿using BarBuddy.Data;
+using BarBuddy.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver.GeoJsonObjectModel;
 
 namespace BarBuddy.Controllers
 {
@@ -28,6 +30,21 @@ namespace BarBuddy.Controllers
             var result = await _venueService.GetVenues();
 
             return Ok(result);
+        }
+
+        [HttpPut("UpdateVenue")]
+        public async Task<IActionResult> UpdateVenue([FromQuery] Guid id, [FromQuery] string name, [FromQuery] double lat, [FromQuery] double lng)
+        {
+            var updateVenue = new Venue
+            {
+                Id = id,
+                VenueName = name,
+                Location = GeoJson.Point(GeoJson.Position(lat, lng))
+            };
+
+            await _venueService.UpdateVenue(updateVenue);
+
+            return Ok();
         }
     }
 }
