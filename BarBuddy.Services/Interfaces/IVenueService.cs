@@ -11,5 +11,6 @@ namespace BarBuddy.Services.Interfaces
     {
         Task RegisterVenue(string venueName);
         Task<Venue> GetVenueById(string id);
+        Task<List<Venue>> GetVenues();
     }
 }

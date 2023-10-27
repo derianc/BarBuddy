@@ -1,9 +1,5 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MongoDB.Driver.GeoJsonObjectModel;
 
 namespace BarBuddy.Data
 {
@@ -12,5 +8,6 @@ namespace BarBuddy.Data
         [BsonId] 
         public Guid Id { get; set; }
         public string? VenueName { get; set; }
+        public GeoJsonPoint<GeoJson2DCoordinates>? Location { get; set; }
     }
 }

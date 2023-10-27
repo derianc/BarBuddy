@@ -1,6 +1,7 @@
 ﻿using BarBuddy.Data;
 using BarBuddy.Repositories.Interfaces;
 using MongoDB.Driver;
+using MongoDB.Driver.GeoJsonObjectModel;
 
 namespace BarBuddy.Repositories
 {
@@ -20,11 +21,17 @@ namespace BarBuddy.Repositories
             throw new NotImplementedException();
         }
 
+        public Task<List<Venue>> GetVenues()
+        {
+            return _venueCollection.Find(v => true).ToListAsync();
+        }
+
         public async Task RegisterVenue(string venueName)
         {
             var venue = new Venue
             {
                 VenueName = venueName,
+                Location = GeoJson.Point(GeoJson.Position(-74.005, 40.7358879))
             };
 
             await _venueCollection.InsertOneAsync(venue);

@@ -1,23 +1,30 @@
 ﻿using BarBuddy.Data;
+using BarBuddy.Repositories.Interfaces;
 using BarBuddy.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BarBuddy.Services
 {
     public class VenueService : IVenueService
     {
+        private readonly IVenueRepository _venueRepository;
+        public VenueService(IVenueRepository venueRepository)
+        {
+            _venueRepository = venueRepository;
+        }
+
         public Task<Venue> GetVenueById(string id)
         {
             throw new NotImplementedException();
         }
 
-        public Task RegisterVenue(string venueName)
+        public async Task<List<Venue>> GetVenues()
         {
-            throw new NotImplementedException();
+            return await _venueRepository.GetVenues();
+        }
+
+        public async Task RegisterVenue(string venueName)
+        {
+            await _venueRepository.RegisterVenue(venueName);
         }
     }
 }
