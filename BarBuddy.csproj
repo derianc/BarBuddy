@@ -11,15 +11,19 @@
 
   <ItemGroup>
     <Compile Remove="BarBuddy.Data\**" />
+    <Compile Remove="BarBuddy.Extensions\**" />
     <Compile Remove="BarBuddy.Repositories\**" />
     <Compile Remove="BarBuddy.Services\**" />
     <Content Remove="BarBuddy.Data\**" />
+    <Content Remove="BarBuddy.Extensions\**" />
     <Content Remove="BarBuddy.Repositories\**" />
     <Content Remove="BarBuddy.Services\**" />
     <EmbeddedResource Remove="BarBuddy.Data\**" />
+    <EmbeddedResource Remove="BarBuddy.Extensions\**" />
     <EmbeddedResource Remove="BarBuddy.Repositories\**" />
     <EmbeddedResource Remove="BarBuddy.Services\**" />
     <None Remove="BarBuddy.Data\**" />
+    <None Remove="BarBuddy.Extensions\**" />
     <None Remove="BarBuddy.Repositories\**" />
     <None Remove="BarBuddy.Services\**" />
   </ItemGroup>

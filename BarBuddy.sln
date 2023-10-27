@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarBuddy.Services", "BarBud
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarBuddy.Repositories", "BarBuddy.Repositories\BarBuddy.Repositories.csproj", "{24618479-394B-4682-9845-E6C48549CB5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarBuddy.Extensions", "..\BarBuddy.Extensions\BarBuddy.Extensions.csproj", "{2D0779E8-93F6-4626-A51B-BF75F3D347F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarBuddy.Extensions", "BarBuddy.Extensions\BarBuddy.Extensions.csproj", "{1A0A5C49-0C94-4AD4-B285-CCEF71136B56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{24618479-394B-4682-9845-E6C48549CB5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24618479-394B-4682-9845-E6C48549CB5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24618479-394B-4682-9845-E6C48549CB5A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2D0779E8-93F6-4626-A51B-BF75F3D347F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2D0779E8-93F6-4626-A51B-BF75F3D347F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2D0779E8-93F6-4626-A51B-BF75F3D347F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2D0779E8-93F6-4626-A51B-BF75F3D347F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A0A5C49-0C94-4AD4-B285-CCEF71136B56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A0A5C49-0C94-4AD4-B285-CCEF71136B56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A0A5C49-0C94-4AD4-B285-CCEF71136B56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A0A5C49-0C94-4AD4-B285-CCEF71136B56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
