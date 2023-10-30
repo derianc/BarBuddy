@@ -14,6 +14,11 @@ namespace BarBuddy.Services
             _userRepository = userRepository;
         }
 
+        public async Task CheckInToVenue(string username, string venueId)
+        {
+            await _userRepository.CheckInToVenue(username, venueId);
+        }
+
         public async Task CreateUser(string firstName, string lastName, string username, string email, string password)
         {
             await _userRepository.CreateUser(firstName, lastName, username, email, password);

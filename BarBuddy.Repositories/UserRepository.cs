@@ -9,18 +9,34 @@ namespace BarBuddy.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly IRepository _repository;
+        private readonly ICheckinRepository _checkinRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IMongoCollection<ApplicationUser> _usersCollection;
 
         public UserRepository(IRepository repository,
+                              ICheckinRepository checkinRepository,
                               UserManager<ApplicationUser> userManager, 
                               SignInManager<ApplicationUser> signInManager)
         {
             _repository = repository;
             _userManager = userManager;
             _signInManager = signInManager;
+            _checkinRepository= checkinRepository;
             _usersCollection = _repository.Database.GetCollection<ApplicationUser>("Users");
+        }
+
+        public async Task CheckInToVenue(string username, string venueId)
+        {
+            var loggedInUser = await _userManager.FindByNameAsync(username);
+            var venueCheckin = new VenueCheckin
+            {
+                UserId = new Guid(loggedInUser.Id.ToString()),
+                VenueId = new Guid(venueId),
+                CreatedOn= DateTime.Now,
+            };
+
+            await _checkinRepository.CheckinUser(venueCheckin);
         }
 
         public async Task CreateUser(string firstName, string lastName, string username, string email, string password)
@@ -44,7 +60,9 @@ namespace BarBuddy.Repositories
         public async Task<List<ApplicationUser>> ListUsers()
         {
             var users = await _usersCollection.Find(u => true).ToListAsync();
-            
+            foreach (var user in users)
+                user.Checkins = await _checkinRepository.GetUserCheckins(user.Id);
+
             return users;
         }
 

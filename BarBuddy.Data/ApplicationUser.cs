@@ -10,5 +10,6 @@ namespace BarBuddy.Data
         public string? LastName { get; set; }
         public string? QrCode { get; set; }
         public DateTime? DOB { get; set; }
+        public List<VenueCheckin>? Checkins { get; set; }
     }
 }

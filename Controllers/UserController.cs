@@ -1,4 +1,5 @@
-﻿using BarBuddy.Data;
+﻿using Amazon.Runtime.Internal;
+using BarBuddy.Data;
 using BarBuddy.Services;
 using BarBuddy.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -44,6 +45,19 @@ namespace BarBuddy.Controllers
         public async Task<IActionResult> ListUsers()
         {
             return Ok(await _userService.ListUsers());
+        }
+
+        [HttpPost("CheckinToVenue")]
+        public async Task<IActionResult> CheckinToVenue(string username, string venueId)
+        {
+            var loggedInUserName = User.Identity?.Name;
+            if (!string.IsNullOrEmpty(loggedInUserName))
+            {
+                await _userService.CheckInToVenue(loggedInUserName, venueId);
+                return Ok();
+            }
+
+            return BadRequest();
         }
     }
 }
