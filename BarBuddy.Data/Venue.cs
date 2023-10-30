@@ -8,6 +8,6 @@ namespace BarBuddy.Data
         [BsonId] 
         public Guid Id { get; set; }
         public string? VenueName { get; set; }
-        public GeoJsonPoint<GeoJson2DCoordinates>? Location { get; set; }
+        public GeoJsonPoint<GeoJson2DCoordinates>? Location { get; set; } 
     }
 }
