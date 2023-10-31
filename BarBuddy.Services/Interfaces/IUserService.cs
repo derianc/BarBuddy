@@ -9,6 +9,6 @@ namespace BarBuddy.Services.Interfaces
         Task<SignInResult> LoginUser(string username, string password);
         Task LogoutUser();
         Task<List<ApplicationUser>> ListUsers();
-        Task CheckInToVenue(string username, string venueId);
+        Task AddSpend(Guid userId, Guid venueId, double amount);
     }
 }

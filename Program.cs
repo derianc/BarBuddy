@@ -19,7 +19,8 @@ builder.Services.AddSingleton(typeof(IRepository), typeof(Repository));
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IVenueRepository, VenueRepository>();
-builder.Services.AddScoped<ICheckinRepository, CheckinRepository>();
+builder.Services.AddScoped<IVenueSpendRepository, VenueSpendRepository>();
+builder.Services.AddScoped<IVenueCheckinRepository, VenueCheckinRepository>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRoleService, RoleService>();

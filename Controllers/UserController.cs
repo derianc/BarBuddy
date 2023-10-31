@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 
 namespace BarBuddy.Controllers
 {
@@ -47,16 +48,15 @@ namespace BarBuddy.Controllers
             return Ok(await _userService.ListUsers());
         }
 
-        [HttpPost("CheckinToVenue")]
-        public async Task<IActionResult> CheckinToVenue(string username, string venueId)
+        [HttpPost("AddSpend")]
+        public async Task<IActionResult> AddSpend(string venueId, double amount)
         {
-            var loggedInUserName = User.Identity?.Name;
-            if (!string.IsNullOrEmpty(loggedInUserName))
+            var userId = User?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (userId != null)
             {
-                await _userService.CheckInToVenue(loggedInUserName, venueId);
+                await _userService.AddSpend(new Guid(userId), new Guid(venueId), amount);
                 return Ok();
             }
-
             return BadRequest();
         }
     }

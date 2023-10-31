@@ -7,16 +7,40 @@ namespace BarBuddy.Services
 {
     public class UserService : IUserService
     {
-        private IUserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IVenueSpendRepository _venueSpendRepository;
+        private readonly IVenueCheckinRepository _venueCheckinRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository,
+                           IVenueSpendRepository venueSpendRepository,
+                           IVenueCheckinRepository venueCheckinRepository)
         {
             _userRepository = userRepository;
+            _venueSpendRepository = venueSpendRepository;       
+            _venueCheckinRepository = venueCheckinRepository;
         }
 
-        public async Task CheckInToVenue(string username, string venueId)
+        public async Task AddSpend(Guid userId, Guid venueId, double amount)
         {
-            await _userRepository.CheckInToVenue(username, venueId);
+            // check if logged in user has been at this venue on this day
+            var venueCheckin = await _venueCheckinRepository.GetUserCheckinByVenueAndDate(userId, venueId, DateTime.Now.Date);
+
+            // if user does not have a check in for this day, create one
+            if (venueCheckin == null)
+                venueCheckin = await _venueCheckinRepository.CheckinUser(userId, venueId);
+
+            // record how much user spent at venue
+            var vsInsert = await _venueSpendRepository.AddVenueSpend(new VenueSpend {
+                                                                        VenueCheckinId = venueCheckin.Id,
+                                                                        UserId = userId,
+                                                                        Amount = amount,
+                                                                        CreatedOn = DateTime.UtcNow
+                                                                    }
+            );
+            venueCheckin.VenueSpendIds.Add(vsInsert.Id);
+
+            // add spent amount to venue checkin for today's date
+            await _venueCheckinRepository.AddSpend(venueCheckin);
         }
 
         public async Task CreateUser(string firstName, string lastName, string username, string email, string password)
