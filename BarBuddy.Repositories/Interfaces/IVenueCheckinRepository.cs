@@ -10,7 +10,7 @@ namespace BarBuddy.Repositories.Interfaces
     public interface IVenueCheckinRepository
     {
         Task<VenueCheckin> CheckinUser(Guid userId, Guid venueId);
-        Task<List<VenueCheckin>> GetUserCheckins(Guid loggedInUserId);
+        Task<List<Guid>> GetUserCheckins(Guid loggedInUserId);
         Task<VenueCheckin> GetUserCheckinByVenueAndDate(Guid userId, Guid venueId, DateTime date);
         Task AddSpend(VenueCheckin venueCheckin);
     }

@@ -43,11 +43,11 @@ namespace BarBuddy.Repositories
             return userCheckin.FirstOrDefault();
         }
 
-        public async Task<List<VenueCheckin>> GetUserCheckins(Guid loggedInUserId)
+        public async Task<List<Guid>> GetUserCheckins(Guid loggedInUserId)
         {
-            var userCheckin = await _venueCheckinCollection.FindAsync(vc => vc.UserId == loggedInUserId);
+            var userCheckin = (await _venueCheckinCollection.FindAsync(vc => vc.UserId == loggedInUserId)).ToList().Select(c => c.Id).ToList();
 
-            return userCheckin.ToList();
+            return userCheckin;
         }
     }
 }
