@@ -24,7 +24,7 @@ namespace BarBuddy.Controllers
             return Ok();
         }
 
-        [HttpPost("GetAll")]
+        [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _venueService.GetVenues();

@@ -1,4 +1,5 @@
 ﻿using BarBuddy.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BarBuddy.Controllers
@@ -9,18 +10,16 @@ namespace BarBuddy.Controllers
     {
         private readonly IUserService _userService;
         private readonly IRoleService _roleService;
-        private readonly IVenueService _venueService;
 
         public AdminController(IUserService userService, 
-                               IRoleService roleService,
-                               IVenueService venueService)
+                               IRoleService roleService)
         {
             _userService = userService;
             _roleService = roleService;
-            _venueService = venueService;
         }
 
         [HttpPost("CreateUser")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateUser(string firstName, string lastName, string username, string email, string password)
         {
             await _userService.CreateUser(firstName, lastName, username, email, password);
@@ -29,6 +28,7 @@ namespace BarBuddy.Controllers
         }
 
         [HttpPost("CreateRole")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateRole(string name)
         {
             await _roleService.CreateRole(name);

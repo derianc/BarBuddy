@@ -41,14 +41,15 @@ namespace BarBuddy.Controllers
             return Ok();
         }
 
-        [HttpPost("ListUsers")]
-        //[Authorize(Roles = "Admin")]
+        [HttpGet("ListUsers")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ListUsers()
         {
             return Ok(await _userService.ListUsers());
         }
 
         [HttpPost("AddSpend")]
+        [Authorize]
         public async Task<IActionResult> AddSpend(string venueId, double amount)
         {
             var userId = User?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
