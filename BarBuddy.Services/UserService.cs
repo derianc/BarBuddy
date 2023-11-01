@@ -53,7 +53,7 @@ namespace BarBuddy.Services
             return await _userRepository.ListUsers();
         }
 
-        public async Task<SignInResult> LoginUser(string username, string password)
+        public async Task<string> LoginUser(string username, string password)
         {
             return await _userRepository.LoginUser(username, password);
         }

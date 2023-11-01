@@ -26,10 +26,10 @@ namespace BarBuddy.Controllers
         public async Task<IActionResult> Login([Required][EmailAddress] string username, [Required] string password)
         {
             var result = await _userService.LoginUser(username, password);
-
-            if (result.Succeeded)
-                return Ok(result);
-            return BadRequest(result);
+            
+            if (string.IsNullOrEmpty(result))
+                return Unauthorized();
+            return Ok(result);
         }
 
         [HttpPost("Logout")]
@@ -49,7 +49,7 @@ namespace BarBuddy.Controllers
         }
 
         [HttpPost("AddSpend")]
-        [Authorize]
+        [Authorize(Roles = "Admin, User")]
         public async Task<IActionResult> AddSpend(string venueId, double amount)
         {
             var userId = User?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
