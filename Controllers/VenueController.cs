@@ -18,7 +18,7 @@ namespace BarBuddy.Controllers
         }
 
         [HttpPost("RegisterVenue")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> RegisterVenue(string venueName)
         {
             await _venueService.RegisterVenue(venueName);
@@ -27,7 +27,7 @@ namespace BarBuddy.Controllers
         }
 
         [HttpGet("GetAll")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _venueService.GetVenues();
@@ -36,7 +36,7 @@ namespace BarBuddy.Controllers
         }
 
         [HttpPut("UpdateVenue")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateVenue([FromQuery] Guid id, [FromQuery] string name, [FromQuery] double lat, [FromQuery] double lng)
         {
             var updateVenue = new Venue
